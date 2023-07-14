@@ -11,12 +11,12 @@ const Hero = () => {
   });
 
   return (
-    <>
+    <section className="container">
       {beers.map((beer) => (
         <BeerCard key={beer.id} {...beer} />
       ))}
       <div ref={ref}>123</div>
-    </>
+    </section>
   );
 };
 

@@ -5,10 +5,10 @@ const BeerCard = (props) => {
   const handleToggle = useBeers((state) => state.toggleRecipeSelection);
 
   return (
-    <div>
-      <p>{props.name}</p>
-      <img src={props.image_url} alt="beer" />
-      <p>{props.description}</p>
+    <div className="beer_card">
+      <h1 className="beer_card__header">{props.name}</h1>
+      <img className="beer_card__image" src={props.image_url} alt="beer" />
+      <p className="beer_card__description">{props.description}</p>
     </div>
   );
 };
