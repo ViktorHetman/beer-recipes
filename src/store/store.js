@@ -1,23 +1,14 @@
 import { create } from "zustand";
+import { fetchBeers } from "../services/getRecipes";
 
 export const useBeers = create((set) => ({
   beers: [],
   selectedRecipes: [],
-  loading: false,
-  error: null,
-  fetchBeers: async (url) => {
-    set({ loading: true });
+  currentPage: 1,
 
-    try {
-      const res = await fetch(url);
-
-      if (!res.ok) throw new Error("Failed to fetch! Try again");
-      set({ beers: await res.json(), error: null });
-    } catch (error) {
-      set({ error: error.message });
-    } finally {
-      set({ loading: false });
-    }
+  loadRecipes: async (url) => {
+    const recipes = await fetchBeers(url);
+    set((state) => ({ beers: [...state.beers, ...recipes] }));
   },
   deleteRecipeSelection: () => {
     set((state) => ({
@@ -30,7 +21,7 @@ export const useBeers = create((set) => ({
   toggleRecipeSelection: (recipeId) => {
     set((state) => {
       const selectedRecipes = state.selectedRecipes.includes(recipeId)
-        ? state.selectedRecipes.filter((id) => id === recipeId)
+        ? state.selectedRecipes.filter((id) => id !== recipeId)
         : [...state.selectedRecipes, recipeId];
       return { selectedRecipes };
     });

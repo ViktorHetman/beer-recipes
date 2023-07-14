@@ -2,21 +2,21 @@ import { useBeers } from "../store/store";
 
 const BeerCard = (props) => {
   const handleToggle = useBeers((state) => state.toggleRecipeSelection);
-
   const handleRecipeClick = (e, id) => {
     e.preventDefault();
     if (e.button === 2) {
       handleToggle(id);
-      console.log(2);
     } else if (e.button === 0) {
-      console.log("lkm");
+      ("");
     }
   };
 
   return (
     <div
-      className="beer_card"
-      onContextMenu={(e) => handleRecipeClick(e, props.id)}
+      className={`beer_card`}
+      onContextMenu={(e) => {
+        handleRecipeClick(e, props.id);
+      }}
       onClick={(e) => handleRecipeClick(e, props.id)}
     >
       <h1 className="beer_card__header">{props.name}</h1>

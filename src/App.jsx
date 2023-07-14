@@ -8,13 +8,16 @@ import { WEB_URL } from "./utils/constants";
 import "./App.css";
 
 const App = () => {
-  const fetchBeers = useBeers((state) => state.fetchBeers);
+  const beers = useBeers((state) => state.beers);
+  const loadRecipes = useBeers((state) => state.loadRecipes);
   const [currentPage, setCurrentPage] = React.useState(1);
 
   React.useEffect(() => {
-    fetchBeers(`${WEB_URL}page=1`);
-  }, []);
-  console.log(currentPage);
+    if (beers.length < 15) {
+      loadRecipes(`${WEB_URL}?page=${currentPage}`);
+      setCurrentPage((prev) => prev + 1);
+    }
+  }, [beers.length]);
 
   return (
     <>

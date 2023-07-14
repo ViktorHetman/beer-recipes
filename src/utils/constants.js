@@ -1,1 +1,1 @@
-export const WEB_URL = "https://api.punkapi.com/v2/beers?";
+export const WEB_URL = "https://api.punkapi.com/v2/beers";

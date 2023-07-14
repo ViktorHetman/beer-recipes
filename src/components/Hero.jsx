@@ -1,5 +1,3 @@
-import { useInView } from "react-intersection-observer";
-
 import BeerCard from "./BeerCard";
 
 import { useBeers } from "../store/store";
