@@ -26,4 +26,9 @@ export const useBeers = create((set) => ({
       return { selectedRecipes };
     });
   },
+  removeFirstFiveRecipes: () => {
+    set((state) => ({
+      beers: state.beers.slice(5),
+    }));
+  },
 }));

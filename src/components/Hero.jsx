@@ -7,9 +7,6 @@ const Hero = () => {
   const selectedRecipes = useBeers((state) => state.selectedRecipes);
   const handleDelete = useBeers((state) => state.deleteRecipeSelection);
   const slicedBeers = beers.slice(0, 15);
-  // const { ref, inView } = useInView({
-  //   threshold: 0.5,
-  // });
 
   return (
     <section>
