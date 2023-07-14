@@ -1,30 +1,25 @@
 import React from "react";
 
+import Hero from "./components/Hero";
+
 import { useBeers } from "./store/store";
 import { WEB_URL } from "./utils/constants";
 
+import "./App.css";
+
 const App = () => {
-  const { fetchBeers, beers } = useBeers((state) => ({
-    loading: state.loading,
-    error: state.error,
-    fetchBeers: state.fetchBeers,
-    beers: state.beers,
-  }));
+  const fetchBeers = useBeers((state) => state.fetchBeers);
+  const [currentPage, setCurrentPage] = React.useState(1);
 
   React.useEffect(() => {
-    fetchBeers(WEB_URL);
+    fetchBeers(`${WEB_URL}page=1`);
   }, []);
+  console.log(currentPage);
 
   return (
-    <div>
-      {beers.map((beer) => (
-        <div key={beer.id}>
-          <p>{beer.name}</p>
-          <img src={beer.image_url} alt="beer" />
-          <span>{beer.description}</span>
-        </div>
-      ))}
-    </div>
+    <>
+      <Hero setCurrentPage={setCurrentPage} />
+    </>
   );
 };
 
