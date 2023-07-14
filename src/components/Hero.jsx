@@ -6,16 +6,25 @@ import { useBeers } from "../store/store";
 
 const Hero = () => {
   const beers = useBeers((state) => state.beers);
-  const { ref, inView } = useInView({
-    threshold: 0.5,
-  });
+  const selectedRecipes = useBeers((state) => state.selectedRecipes);
+  const handleDelete = useBeers((state) => state.deleteRecipeSelection);
+  const slicedBeers = beers.slice(0, 15);
+  // const { ref, inView } = useInView({
+  //   threshold: 0.5,
+  // });
 
   return (
-    <section className="container">
-      {beers.map((beer) => (
-        <BeerCard key={beer.id} {...beer} />
-      ))}
-      <div ref={ref}>123</div>
+    <section>
+      {selectedRecipes.length > 0 && (
+        <button className="delete_btn" onClick={() => handleDelete()}>
+          Delete choosed recipes
+        </button>
+      )}
+      <div className="container">
+        {slicedBeers.map((beer) => (
+          <BeerCard key={beer.id} {...beer} />
+        ))}
+      </div>
     </section>
   );
 };

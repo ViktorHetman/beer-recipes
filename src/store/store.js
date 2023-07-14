@@ -30,7 +30,7 @@ export const useBeers = create((set) => ({
   toggleRecipeSelection: (recipeId) => {
     set((state) => {
       const selectedRecipes = state.selectedRecipes.includes(recipeId)
-        ? state.selectedRecipes.filter((id) => id !== recipeId)
+        ? state.selectedRecipes.filter((id) => id === recipeId)
         : [...state.selectedRecipes, recipeId];
       return { selectedRecipes };
     });

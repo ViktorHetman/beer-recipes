@@ -5,12 +5,13 @@
   color: white;
 }
 .container {
-  max-width: 90%;
+  max-width: 95%;
   margin-left: auto;
   margin-right: auto;
   display: block;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   gap: 25px;
 }
 
@@ -26,15 +27,15 @@
   overflow-y: hidden;
   align-items: center;
   font-size: 12px;
+  box-shadow: 10px 5px 5px #212121;
 }
 
 .beer_card:hover {
-  .beer_card__image {
-    transition: 500ms ease-in-out;
-    transform: translate(0px, 7%);
-  }
+  transition: 500ms ease-in-out;
+  transform: translate(0px, 7%);
+
   .beer_card__header {
-    letter-spacing: 3px;
+    letter-spacing: 2px;
   }
 }
 
@@ -51,4 +52,28 @@
   text-align: center;
   padding-bottom: 8px;
   margin-top: 10px;
+}
+
+.choosed_recipe {
+  border: 2px solid red;
+}
+
+.delete_btn {
+  border: 2cap solid darkred;
+  height: 50px;
+  cursor: pointer;
+  border-radius: 25px;
+  background-color: red;
+  display: block;
+  margin: 0 auto;
+  padding: 1rem;
+  margin-top: 10px;
+}
+.delete_btn:hover {
+  background-color: #f24b4b;
+  transition: 300ms ease-in-out;
+}
+
+.delete_btn:active {
+  background-color: darkred;
 }
