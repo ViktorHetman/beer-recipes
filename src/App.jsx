@@ -1,6 +1,8 @@
 import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Hero from "./components/Hero";
+import CertainBeer from "./components/CertainBeer";
 
 import { useBeers } from "./store/store";
 import { WEB_URL } from "./utils/constants";
@@ -33,12 +35,22 @@ const App = () => {
       setCurrentPage((prev) => prev + 1);
     }
     return () => document.removeEventListener("scroll", handleScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [beers.length]);
+  console.log(beers);
 
   return (
-    <section ref={sectionRef} onScroll={(e) => handleScroll(e)}>
-      <Hero setCurrentPage={setCurrentPage} />
-    </section>
+    <BrowserRouter>
+      <section ref={sectionRef} onScroll={(e) => handleScroll(e)}>
+        <Routes>
+          <Route
+            path="*"
+            element={<Hero setCurrentPage={setCurrentPage} />}
+          ></Route>
+          <Route path="/beer/:id" element={<CertainBeer {...beers} />} />
+        </Routes>
+      </section>
+    </BrowserRouter>
   );
 };
 

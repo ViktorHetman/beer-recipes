@@ -1,27 +1,33 @@
+import LazyLoad from "react-lazyload";
+import { useNavigate } from "react-router-dom";
+
 import { useBeers } from "../store/store";
 
-const BeerCard = (props) => {
+const BeerCard = ({ name, id, description, image_url, choosed }) => {
   const handleToggle = useBeers((state) => state.toggleRecipeSelection);
-  const handleRecipeClick = (e, id) => {
+  const navigate = useNavigate();
+  const handleRecipeClick = (e, id, choosed) => {
     e.preventDefault();
     if (e.button === 2) {
-      handleToggle(id);
+      handleToggle(id, choosed);
     } else if (e.button === 0) {
-      ("");
+      navigate(`beer/:${id}`);
     }
   };
 
   return (
     <div
-      className={`beer_card`}
+      className={`beer_card ${choosed ? "choosed_recipe" : ""}`}
       onContextMenu={(e) => {
-        handleRecipeClick(e, props.id);
+        handleRecipeClick(e, id, choosed);
       }}
-      onClick={(e) => handleRecipeClick(e, props.id)}
+      onClick={(e) => handleRecipeClick(e, id)}
     >
-      <h1 className="beer_card__header">{props.name}</h1>
-      <img className="beer_card__image" src={props.image_url} alt="beer" />
-      <p className="beer_card__description">{props.description}</p>
+      <h1 className="beer_card__header">{name}</h1>
+      <LazyLoad>
+        <img className="beer_card__image" src={image_url} alt="beer" />
+      </LazyLoad>
+      <p className="beer_card__description">{description}</p>
     </div>
   );
 };
